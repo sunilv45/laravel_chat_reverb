@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Chat app", // <-- to identify the connection
+    "type": "mysql", // <- or "mariadb" if you are using MariaDB
+    "host": "127.0.0.1",
+    "port": "3306",
+    "username": "root",
+    "password": "Sunil@123@#",
+    "database": "chat_app_reverb" // <-- the database to show in VS Code DevDb view
+  }
+]
