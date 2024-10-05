@@ -21,10 +21,37 @@ class ChatComponent extends Component
         return view('livewire.chat-component');
     }
 
-    public function mount($user_id){
+    public function mount(){
         $this->sender_id = auth()->user()->id;
-        $this->receiver_id = $user_id;
 
+        /*$messages = Message::where(function($query) {
+            $query->where('sender_id', $this->sender_id)
+                ->where('receiver_id', $this->receiver_id);
+        })->orWhere(function ($query){
+            $query->where('sender_id', $this->receiver_id)
+                ->where('receiver_id', $this->sender_id);
+        })->with('sender:id,name','receiver:id,name')
+        ->get();
+        foreach($messages as $message){
+            $this->appendChatMessage($message);
+        }
+        //$this->messages = $messages;
+        $this->user = User::whereId($this->receiver_id)->first();*/
+    }
+
+    #[On('userSelected')]
+    public function userSelected($user_id)
+    {
+        $this->receiver_id = $user_id;
+        $this->sender_id = auth()->user()->id;
+        $this->loadChatMessages();
+
+        $this->user = User::find($user_id);
+    }
+
+    public function loadChatMessages()
+    {
+        $this->messages = [];
         $messages = Message::where(function($query) {
             $query->where('sender_id', $this->sender_id)
                 ->where('receiver_id', $this->receiver_id);
@@ -36,9 +63,8 @@ class ChatComponent extends Component
         foreach($messages as $message){
             $this->appendChatMessage($message);
         }
-        //dd($this->messages);
         //$this->messages = $messages;
-        $this->user = User::whereId($user_id)->first();
+        $this->user = User::whereId($this->receiver_id)->first();
     }
 
     public function sendMessage(){

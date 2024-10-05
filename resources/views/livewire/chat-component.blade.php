@@ -5,12 +5,13 @@
         <!-- Main Chat Area -->
         <div class="flex-1">
             <!-- Chat Header -->
+            @if($user)
             <header class="bg-white p-4 text-gray-700">
                 <h1 class="text-2xl font-semibold">{{ $user->name }}</h1>
             </header>
 
             <!-- Chat Messages -->
-            <div class="h-[42.5rem] overflow-y-auto px-4" id="chat-container">
+            <div class="h-[38rem] overflow-y-auto px-4" id="chat-container">
                 @foreach($messages as $message)
                     @if($message['sender'] != auth()->user()->id)
                     <!-- Incoming Message -->
@@ -57,6 +58,9 @@
                     </button>
                 </div>
             </form>
+            @else
+                <p>Please select a user to start chatting.</p>
+            @endif
         </div>
     </div>
 </div>
@@ -101,6 +105,14 @@
     window.addEventListener('scrollDown', function () {
         let container = document.getElementById('chat-container');
         container.scrollTop = container.scrollHeight;
+    });
+</script>
+<script>
+    document.addEventListener('livewire:init', () => {
+       Livewire.on('scrollDown', (event) => {
+            let container = document.getElementById('chat-container');
+            container.scrollTop = container.scrollHeight;
+       });
     });
 </script>
 

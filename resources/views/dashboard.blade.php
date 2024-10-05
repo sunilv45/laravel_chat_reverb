@@ -7,11 +7,15 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex flex-wrap">
+                <div class="p-6 text-gray-900 dark:text-gray-100 w-1/5">
+                    {{-- <p onclick="Livewire.dispatchTo('chat-component','userSelected', { user_id: 2 })" class="cursor-pointer">Test Click</p> --}}
                     @foreach ($users as $user)
-                        <p><a href="{{ route('chat', $user->id) }}">{{ $user->name }}</a></p>
+                        <p onclick="Livewire.dispatchTo('chat-component','userSelected', { user_id: {{ $user->id }} })" class="cursor-pointer">{{ $user->name }}</p>
                     @endforeach
+                </div>
+                <div class="w-4/5 h-screen">
+                    @livewire('chat-component')
                 </div>
             </div>
         </div>
