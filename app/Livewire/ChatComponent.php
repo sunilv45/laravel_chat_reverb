@@ -18,6 +18,7 @@ class ChatComponent extends Component
 
     public function render()
     {
+        $this->dispatch('scrollDown');
         return view('livewire.chat-component');
     }
 
