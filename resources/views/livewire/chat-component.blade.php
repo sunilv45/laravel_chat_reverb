@@ -15,11 +15,15 @@
                                    <circle cx="8" cy="8" r="8" fill="currentColor"></circle>
                                 </svg>
                              </span>
-                          <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="" class="w-10 sm:w-10 h-10 sm:h-10 rounded-full">
+                             @if(isset($user->profile))
+                                <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="" class="w-10 sm:w-10 h-10 sm:h-10 rounded-full">
+                            @else
+                            <img src="https://ui-avatars.com/api/?background=random&name={{$user->name}}" alt="{{$user->name}}" class="w-10 sm:w-10 h-10 sm:h-10 rounded-full">
+                            @endif
                           </div>
                           <div class="flex flex-col leading-tight">
                              <div class="text-2xl mt-1 flex items-center">
-                                <span class="text-gray-700 mr-3">{{ $user->name }}</span>
+                                <span class="text-gray-700 mr-3 md:text-xl">{{ $user->name }}</span>
                              </div>
                              {{-- <span class="text-lg text-gray-600">Junior Developer</span> --}}
                           </div>
@@ -75,7 +79,7 @@
                                 </svg>
                              </button>
                           </span>
-                          <input type="text" wire:model="message" id="chat" placeholder="Write your message!" class="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3">
+                          <textarea wire:model="message" id="chat" placeholder="Write your message!" class="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3 h-12"></textarea>
                           <form wire:submit="sendMessage()">
                             <div class="absolute right-0 items-center inset-y-0 hidden sm:flex">
                                 <button type="button" class="inline-flex items-center justify-center rounded-full h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none">
@@ -113,5 +117,25 @@
         </div>
     </div>
 </div>
-
+<script>
+    window.addEventListener('scrollDown', function () {
+        console.log("worked")
+        let container = document.getElementById('chat-container');
+        container.scrollTop = container.scrollHeight;
+    });
+</script>
+<script>
+    window.addEventListener('scrollDownMessage', function () {
+        console.log("scrollDownMessage")
+        let messageContainer = document.getElementById('chat-container');
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+    });
+</script>
+<script>
+    window.addEventListener('scrollDownMessageListen', function () {
+        console.log("scrollDownMessageListen")
+        let messageContainer = document.getElementById('chat-container');
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+    });
+</script>
 

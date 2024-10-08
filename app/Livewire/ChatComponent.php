@@ -77,6 +77,7 @@ class ChatComponent extends Component
         $chatMessage->save();
 
         $this->appendChatMessage($chatMessage);
+        //$this->dispatch('scrollDownMessage');
         $this->dispatch('scrollDown');
         broadcast(new MessageSendEvent($chatMessage))->toOthers();
 
@@ -85,6 +86,8 @@ class ChatComponent extends Component
 
     #[On('echo-private:chat-channel.{sender_id},MessageSendEvent')]
     public function listenForMessage($event){
+        // $this->dispatch('scrollDownMessageListen');
+        $this->dispatch('scrollDown');
         $chatMessage = Message::whereId($event['message']['id'])->with('sender:id,name','receiver:id,name')->first();
         $this->appendChatMessage($chatMessage);
     }
