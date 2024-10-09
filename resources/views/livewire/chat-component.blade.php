@@ -98,7 +98,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
                                 </button>
-                                <button type="submit" class="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none">
+                                <button id="send_message" type="submit" class="send_message inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none">
                                     <span class="font-bold">Send</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-6 w-6 ml-2 transform rotate-90">
                                     <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
@@ -110,7 +110,7 @@
                     </div>
                  </div>
             @else
-                <div class="h-[38rem] overflow-y-auto px-4" id="chat-container">
+                <div class="h-[38rem] overflow-y-auto px-4 flex items-center justify-center" id="chat-container">
                     <p>Please select user to chat.</p>
                 </div>
             @endif
@@ -118,6 +118,11 @@
     </div>
 </div>
 <script>
+    $('#send_message').click(function(e){
+        let container = document.getElementById('chat-container');
+        container.scrollTop = container.scrollHeight;
+    });
+
     window.addEventListener('scrollDown', function () {
         console.log("worked")
         let container = document.getElementById('chat-container');
